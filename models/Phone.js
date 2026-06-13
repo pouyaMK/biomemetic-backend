@@ -1,32 +1,21 @@
-// const mongoose = require("mongoose");
+const pool = require("../db");
 
-// const phoneSchema = new mongoose.Schema(
-//   {
-//     phone: {
-//       type: String,
-//       required: true,
-//     },
-//   },
-//   { timestamps: true }
-// );
+const createTable = async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS phones (
+        id SERIAL PRIMARY KEY,
+        phone VARCHAR(11) NOT NULL,
+        feature VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+    console.log("Table ready");
+  } catch (err) {
+    console.log("Table error:", err.message);
+  }
+};
 
-// module.exports = mongoose.model("Phone", phoneSchema);
+createTable();
 
-const mongoose = require("mongoose");
-
-const phoneSchema = new mongoose.Schema(
-  {
-    phone: {
-      type: String,
-      required: true,
-    },
-
-    feature: {
-      type: String,
-      required: true,
-    },
-  },
-  { timestamps: true }
-);
-
-module.exports = mongoose.model("Phone", phoneSchema);
+module.exports = pool;
