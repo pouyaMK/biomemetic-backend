@@ -1,9 +1,6 @@
 # dependencies
 node_modules/
 
-# environment variables
-.env
-
 # next.js build
 .next/
 out/
@@ -18,3 +15,10 @@ yarn-error.log*
 .DS_Store
 
 package-lock.json
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
